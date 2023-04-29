@@ -3,7 +3,7 @@ from turtle import Turtle, Screen
 #remember to indent correctly.
 STARTING_POSITIONS = [(0,0), (-20,0), (-40,0)]
 MOVE_DISTANCE = 10
-MOVE_INTERVAL = 100
+MOVE_INTERVAL = 1000
 screen = Screen()
 class Snake:
     #create a snake body
@@ -37,7 +37,14 @@ class Snake:
             
             self.head.forward(MOVE_DISTANCE)
             
-            
+    def reset(self):
+        for seg in self.snake:
+            seg.goto(1000, 1000)
+        self.snake.clear()
+        self.create_snake()
+        self.head = self.snake[0]
+        
+                
     def move_up(self):
         if self.head.heading() != 270:
             self.head.setheading(90)

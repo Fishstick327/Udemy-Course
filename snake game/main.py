@@ -18,14 +18,19 @@ snake = Snake()
     #make a copy if you need to
 def game_over():
     print("GAME OVER")
-    time.sleep(1)
+    time.sleep(2)
     game_over_t = Turtle()
     game_over_t.penup()
     game_over_t.color("white")
     game_over_t.goto(0, 0)
+    reset_score = scoreboard.reset_score()
     game_over_t.write("GAME OVER", align="center", font=("Arial", 25, "normal"))
+    game_over_t.clear()
     screen.update()
+    snake.reset()
     game_over_t.hideturtle()
+    
+
 
 game_is_on = True
 while game_is_on:    #while loop is on update the screen every 0.1 second
@@ -38,12 +43,15 @@ while game_is_on:    #while loop is on update the screen every 0.1 second
     if snake.head.distance(food) < 15:
         food.refresh()
         create_snake = snake.create_snake()
+        increase_score = scoreboard.increase_score()
         update_score = scoreboard.update_score()
-        show_score = scoreboard.show_score()
-
+        
     #detect collision with wall
     if snake.head.xcor() > 280 or snake.head.xcor() < -290 or snake.head.ycor() > 280 or snake.head.ycor() < -290:
         game_over()
-        game_is_on = False
-
+        
+        
+        
+    
+    
 screen.exitonclick()
